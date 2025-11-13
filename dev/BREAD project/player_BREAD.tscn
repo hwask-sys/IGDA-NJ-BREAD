@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://xb5i5ynpctpq"]
+[gd_scene load_steps=12 format=3 uid="uid://box0cnavbptwm"]
 
-[ext_resource type="Script" uid="uid://cviowfvj6frq" path="res://DONOTEDITME/game/sample/player/player_sample.gd" id="2_ebjth"]
-[ext_resource type="Texture2D" uid="uid://ofoqedjacn88" path="res://DONOTEDITME/assets/sprites/player/jammy.png" id="2_tdwd0"]
-[ext_resource type="PackedScene" uid="uid://c1jwyvxr2ohvb" path="res://DONOTEDITME/game/sample/player/player_hitbox.tscn" id="3_oihoa"]
-[ext_resource type="Script" uid="uid://ba1jqafgte36v" path="res://DONOTEDITME/game/sample/player/player_hitbox.gd" id="4_u5s6u"]
+[ext_resource type="Script" uid="uid://dey0junlb6lc1" path="res://dev/BREAD project/breadPlayer.gd" id="1_5i2ua"]
+[ext_resource type="Texture2D" uid="uid://ofoqedjacn88" path="res://DONOTEDITME/assets/sprites/player/jammy.png" id="2_68dig"]
+[ext_resource type="PackedScene" uid="uid://c1jwyvxr2ohvb" path="res://DONOTEDITME/game/sample/player/player_hitbox.tscn" id="3_o4wpo"]
+[ext_resource type="Script" uid="uid://ba1jqafgte36v" path="res://DONOTEDITME/game/sample/player/player_hitbox.gd" id="4_i06s0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md56h"]
 size = Vector2(22, 24)
@@ -88,12 +88,20 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 editor_description = "This is a very basic implementation of the player controller which has horizontal movement, jumping, and an animated sprite. DO NOT modify this packed scene or the player.gd script. You should instead create a script that extends the Player class and create a New Inherited Scene (by right clicking the player.tscn file and clicking \"New Inherited Scene\") to create your own custom player functionality."
 collision_mask = 2
-script = ExtResource("2_ebjth")
+script = ExtResource("1_5i2ua")
+max_horizontal_speed = 300.0
+acceleration = 2000.0
+deceleration = 2000.0
+jump_strength = 600.0
+gravity = 2000.0
+max_fall_speed = 400.0
+max_health = 8.0
+starting_health = 8.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 editor_description = "This is the player sprite. Nothing too fancy"
 z_index = 1
-texture = ExtResource("2_tdwd0")
+texture = ExtResource("2_68dig")
 hframes = 4
 vframes = 3
 
@@ -101,10 +109,10 @@ vframes = 3
 editor_description = "This is the player's collision box. By default it is a rectangle."
 shape = SubResource("RectangleShape2D_md56h")
 
-[node name="PlayerHitbox" parent="." instance=ExtResource("3_oihoa")]
+[node name="PlayerHitbox" parent="." instance=ExtResource("3_o4wpo")]
 editor_description = "This is a basic player hurtbox component (separate from the collision box) designed to detect hazards and enemies. In order for the hurtbox to detect something as dangerous it must be on the Enemy, EnemyProjectile, or Hazard collision layer. Other than that this is just a fancy Area2D node that binds to the player class's default hurt method. Even if you're customizing player behavior I encourage you to use this custom scene.
 "
-script = ExtResource("4_u5s6u")
+script = ExtResource("4_i06s0")
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 collision_mask = 4
