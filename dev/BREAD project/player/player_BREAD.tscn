@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://box0cnavbptwm"]
+[gd_scene load_steps=11 format=3 uid="uid://box0cnavbptwm"]
 
-[ext_resource type="Script" uid="uid://dey0junlb6lc1" path="res://dev/BREAD project/breadPlayer.gd" id="1_5i2ua"]
+[ext_resource type="Script" uid="uid://dey0junlb6lc1" path="res://dev/BREAD project/player/breadPlayer.gd" id="1_5i2ua"]
 [ext_resource type="Texture2D" uid="uid://ofoqedjacn88" path="res://DONOTEDITME/assets/sprites/player/jammy.png" id="2_68dig"]
-[ext_resource type="PackedScene" uid="uid://c1jwyvxr2ohvb" path="res://DONOTEDITME/game/sample/player/player_hitbox.tscn" id="3_o4wpo"]
-[ext_resource type="Script" uid="uid://ba1jqafgte36v" path="res://DONOTEDITME/game/sample/player/player_hitbox.gd" id="4_i06s0"]
+[ext_resource type="PackedScene" uid="uid://desdea2rpmnwu" path="res://dev/BREAD project/player/player_hitbox_BREAD.tscn" id="3_qncrj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md56h"]
 size = Vector2(22, 24)
@@ -109,11 +108,6 @@ vframes = 3
 editor_description = "This is the player's collision box. By default it is a rectangle."
 shape = SubResource("RectangleShape2D_md56h")
 
-[node name="PlayerHitbox" parent="." instance=ExtResource("3_o4wpo")]
-editor_description = "This is a basic player hurtbox component (separate from the collision box) designed to detect hazards and enemies. In order for the hurtbox to detect something as dangerous it must be on the Enemy, EnemyProjectile, or Hazard collision layer. Other than that this is just a fancy Area2D node that binds to the player class's default hurt method. Even if you're customizing player behavior I encourage you to use this custom scene.
-"
-script = ExtResource("4_i06s0")
-
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 collision_mask = 4
 
@@ -124,3 +118,5 @@ shape = SubResource("RectangleShape2D_nhygf")
 libraries = {
 &"": SubResource("AnimationLibrary_csn7c")
 }
+
+[node name="PlayerHitboxBread" parent="." instance=ExtResource("3_qncrj")]

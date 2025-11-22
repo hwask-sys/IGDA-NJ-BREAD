@@ -167,9 +167,9 @@ func check_death() -> void:
 
 ## This function is given to the player under the assumption that the player can deal
 ## contact damage to the enemies somehow (i.e. jumping on the enemy).
-func get_source_damage() -> float:
+'''func get_source_damage() -> float:
 	sound_player.play_sound(hit_sound, global_position) # Assume when this is being called we are dealing damage
-	return contact_damage
+	return contact_damage'''
 
 
 ## Updates the animation state of the player.

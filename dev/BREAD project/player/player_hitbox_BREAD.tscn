@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://desdea2rpmnwu"]
+
+[ext_resource type="Script" uid="uid://dvdvt0ay2m03h" path="res://dev/BREAD project/player/player_hitbox_bread.gd" id="1_ak0fr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kr735"]
+
+[node name="PlayerHitboxBread" type="Area2D"]
+editor_description = "This is a basic player hurtbox component (separate from the collision box) designed to detect hazards and enemies. In order for the hurtbox to detect something as dangerous it must be on the Enemy, EnemyProjectile, or Hazard collision layer. Other than that this is just a fancy Area2D node that binds to the player class's default hurt method."
+collision_mask = 28
+script = ExtResource("1_ak0fr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kr735")
+debug_color = Color(0.935751, 0.254095, 3.85046e-07, 0.42)

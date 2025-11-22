@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3h6mdwwadvso"]
+
+[ext_resource type="Script" uid="uid://2qxocb6e4fml" path="res://dev/BREAD project/boss/projectiles/projectile.gd" id="1_d0mxe"]
+[ext_resource type="Texture2D" uid="uid://cu6lb8f36smdh" path="res://dev/BREAD project/boss/projectiles/toothpick/toothpick.png" id="1_fg24y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0mxe"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(295, 0, 59, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t6wx"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(0, 0, 59, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcr70"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(59, 0, 59, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk8i3"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(118, 0, 59, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv2ak"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(177, 0, 59, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxymo"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(236, 0, 59, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyjnh"]
+atlas = ExtResource("1_fg24y")
+region = Rect2(295, 0, 59, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t1nhy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0mxe")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t6wx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcr70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lk8i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv2ak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxymo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyjnh")
+}],
+"loop": false,
+"name": &"spawn_in",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fg24y"]
+size = Vector2(46, 8)
+
+[node name="SwordToothpick" type="CharacterBody2D"]
+script = ExtResource("1_d0mxe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6.5, 1)
+sprite_frames = SubResource("SpriteFrames_t1nhy")
+animation = &"idle"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_fg24y")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_fg24y")

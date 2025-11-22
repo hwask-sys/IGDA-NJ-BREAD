@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://m1stks4j0m5p"]
+[gd_scene load_steps=9 format=4 uid="uid://m1stks4j0m5p"]
 
 [ext_resource type="Script" uid="uid://dm52hqu27lrbd" path="res://DONOTEDITME/game/system/level.gd" id="1_txowo"]
 [ext_resource type="AudioStream" uid="uid://c87t4mso8y1dw" path="res://DONOTEDITME/assets/sounds/music/Monkeys_Spinning_Monkeys_by_Kevin_MacLeod.ogg" id="2_oy21p"]
+[ext_resource type="PackedScene" uid="uid://b3h6mdwwadvso" path="res://dev/BREAD project/boss/projectiles/toothpick/sword_toothpick.tscn" id="3_dkh7c"]
 [ext_resource type="TileSet" uid="uid://b7temyiqwjg58" path="res://DONOTEDITME/game/sample/tilesets/kenney_tileset_compilation.tres" id="7_cg6cl"]
-[ext_resource type="PackedScene" uid="uid://box0cnavbptwm" path="res://dev/BREAD project/player_BREAD.tscn" id="7_y3rop"]
+[ext_resource type="PackedScene" uid="uid://box0cnavbptwm" path="res://dev/BREAD project/player/player_BREAD.tscn" id="7_y3rop"]
 [ext_resource type="PackedScene" uid="uid://xrv5a4vk77ic" path="res://DONOTEDITME/game/sample/player/player_follow_camera.tscn" id="8_ejnks"]
 [ext_resource type="PackedScene" uid="uid://cavhiq8b25tph" path="res://DONOTEDITME/menu/pause_menu.tscn" id="9_52ida"]
 [ext_resource type="PackedScene" uid="uid://c50558ro1vrqm" path="res://DONOTEDITME/game/sample/parallax_background_sample.tscn" id="10_s1yi1"]
@@ -11,6 +12,9 @@
 [node name="TestEnvironment" type="Node2D"]
 script = ExtResource("1_txowo")
 music_stream = ExtResource("2_oy21p")
+
+[node name="SwordToothpick" parent="." instance=ExtResource("3_dkh7c")]
+position = Vector2(412, 518)
 
 [node name="Player" parent="." instance=ExtResource("7_y3rop")]
 unique_name_in_owner = true
@@ -27,5 +31,3 @@ position = Vector2(273, 421)
 unique_name_in_owner = true
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("10_s1yi1")]
-
-[editable path="Player"]
