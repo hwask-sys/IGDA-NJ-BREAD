@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://knoeyx55ekkd"]
+
+[ext_resource type="Texture2D" uid="uid://whwi5s11o5ar" path="res://dev/BREAD project/player/sword/sword_slash_side.png" id="1_4d5jw"]
+[ext_resource type="Script" uid="uid://dj0ne05vnkt4s" path="res://dev/BREAD project/player/sword/attack_directions/slash.gd" id="1_nb0wq"]
+[ext_resource type="Script" uid="uid://dttx3o7n5n8tr" path="res://dev/BREAD project/player/sword/attack_directions/SwordHitbox.gd" id="2_bfyl7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seaem"]
+size = Vector2(44, 34)
+
+[node name="right_slash" type="Node2D"]
+script = ExtResource("1_nb0wq")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(31, 0)
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("2_bfyl7")
+metadata/_custom_type_script = "uid://dttx3o7n5n8tr"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_seaem")
+debug_color = Color(0.9669103, 0, 0.48057693, 0.41960785)
+
+[node name="SwordSlashSide" type="Sprite2D" parent="."]
+position = Vector2(28, 0)
+texture = ExtResource("1_4d5jw")

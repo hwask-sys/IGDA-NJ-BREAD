@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1di7j7iosvjp"]
+
+[ext_resource type="Texture2D" uid="uid://dwfhqlcaxg2o4" path="res://dev/BREAD project/boss/angel/sprites/epic_angel_bread_thing_sprite_sheet.png" id="1_ag58y"]
+[ext_resource type="Script" uid="uid://c87kooi8bd2ab" path="res://dev/BREAD project/boss/angel/angel.gd" id="1_c1p4y"]
+[ext_resource type="Script" uid="uid://do0lhgavigehl" path="res://dev/BREAD project/boss/angel/BREAD_enemy_contact_hitbox.gd" id="2_632qx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_632qx"]
+atlas = ExtResource("1_ag58y")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1p4y"]
+atlas = ExtResource("1_ag58y")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwdvs"]
+atlas = ExtResource("1_ag58y")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx6tr"]
+atlas = ExtResource("1_ag58y")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gvjjc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_632qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1p4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwdvs")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_nx6tr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1p4y"]
+size = Vector2(64, 64)
+
+[node name="Angel" type="CharacterBody2D"]
+script = ExtResource("1_c1p4y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gvjjc")
+autoplay = "default"
+
+[node name="EnemyContactHitbox" type="Area2D" parent="."]
+editor_description = "This is one of two enemy hitboxes that the LegallyDistinctEnemyType has. This hitbox is specifically tailored to detect and handle player contact damage. Hence it is
+
+1. A one-way collider so it only triggers when the player jumps on the enemy
+
+2. Only the Player bit is selected in the collision mask (this only detects player colliders, not player projectiles)"
+collision_layer = 4
+collision_mask = 44
+script = ExtResource("2_632qx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyContactHitbox"]
+shape = SubResource("RectangleShape2D_c1p4y")
+debug_color = Color(1.68458e-06, 0.636292, 0.406711, 0.42)

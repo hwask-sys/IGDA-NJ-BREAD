@@ -6,13 +6,13 @@ class_name PlayerHitboxBread
 var invincibility = false
 
 func _on_hitbox_entered(other: Area2D):
-	print("entered")
-	# for i-frames
+	#print("entered")
+	## for i-frames
 	if invincibility:
 		return
 	
 	# Ignore hitboxes
-	if other is EnemyHitbox:
+	if other is EnemyHitbox or other is SwordHitbox:
 		return
 	
 	var source = other.get_parent()
@@ -26,5 +26,5 @@ func _on_hitbox_entered(other: Area2D):
 
 func iframes():
 	invincibility = true
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.2).timeout
 	invincibility = false

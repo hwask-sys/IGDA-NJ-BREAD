@@ -16,6 +16,7 @@ const AIR_DRAG_WINDOW = 0.2
 var air_drag_timer = 0
 var air_drag = true
 
+var actionable = true
 
 
 func _physics_process(delta):
@@ -26,6 +27,7 @@ func _physics_process(delta):
 		air_drag_timer -= delta
 		if air_drag_timer <= 0:
 			air_drag = true
+			actionable = true
 	
 	
 	#i have to separate here for the dash state
@@ -72,6 +74,7 @@ func _physics_process(delta):
 		if dash_buffer <= -DASHBUFFERTIME_MAX:
 			dash_state = false
 			velocity.x = 0
+			actionable = true
 		
 		#i forgot to add this lol
 		move_and_slide()
@@ -80,6 +83,7 @@ func _physics_process(delta):
 func airdash():
 	dash_buffer = DASHBUFFERTIME
 	dash_state = true
+	actionable = false
 
 # modified for movement reasons
 func move_horizontal(input: float, delta: float) -> void:
@@ -92,6 +96,9 @@ func move_horizontal(input: float, delta: float) -> void:
 		velocity.x += input * acceleration * delta
 	if abs(velocity.x) > max_horizontal_speed and air_drag:
 		lerpf(velocity.x,max_horizontal_speed * sign(velocity.x) ,deceleration/60 * delta)
+
+func get_source_damage():
+	return 0
 
 # mainly readded for air drag mechanics
 func apply_gravity(delta: float) -> void:

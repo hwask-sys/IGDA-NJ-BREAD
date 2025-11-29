@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://box0cnavbptwm"]
+[gd_scene load_steps=13 format=3 uid="uid://box0cnavbptwm"]
 
 [ext_resource type="Script" uid="uid://dey0junlb6lc1" path="res://dev/BREAD project/player/breadPlayer.gd" id="1_5i2ua"]
 [ext_resource type="Texture2D" uid="uid://ofoqedjacn88" path="res://DONOTEDITME/assets/sprites/player/jammy.png" id="2_68dig"]
 [ext_resource type="PackedScene" uid="uid://desdea2rpmnwu" path="res://dev/BREAD project/player/player_hitbox_BREAD.tscn" id="3_qncrj"]
+[ext_resource type="Script" uid="uid://b1wij1fn2uice" path="res://dev/BREAD project/player/sword/knife_positions.gd" id="4_s0dwc"]
+[ext_resource type="Script" uid="uid://b664o6xi3tv1s" path="res://dev/BREAD project/player/attcking_timer.gd" id="9_e4p5l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md56h"]
 size = Vector2(22, 24)
@@ -86,6 +88,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 editor_description = "This is a very basic implementation of the player controller which has horizontal movement, jumping, and an animated sprite. DO NOT modify this packed scene or the player.gd script. You should instead create a script that extends the Player class and create a New Inherited Scene (by right clicking the player.tscn file and clicking \"New Inherited Scene\") to create your own custom player functionality."
+z_index = 2
 collision_mask = 2
 script = ExtResource("1_5i2ua")
 max_horizontal_speed = 300.0
@@ -120,3 +123,15 @@ libraries = {
 }
 
 [node name="PlayerHitboxBread" parent="." instance=ExtResource("3_qncrj")]
+
+[node name="knife_positions" type="Node2D" parent="."]
+script = ExtResource("4_s0dwc")
+
+[node name="Timer" type="Timer" parent="knife_positions"]
+wait_time = 0.42
+one_shot = true
+script = ExtResource("9_e4p5l")
+
+[connection signal="attacked" from="knife_positions" to="knife_positions" method="_on_attacked"]
+[connection signal="attacked" from="knife_positions" to="knife_positions/Timer" method="_on_knife_positions_attacked"]
+[connection signal="timeout" from="knife_positions/Timer" to="knife_positions" method="_on_timer_timeout"]

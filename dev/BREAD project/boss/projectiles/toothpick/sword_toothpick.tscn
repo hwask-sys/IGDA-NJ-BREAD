@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b3h6mdwwadvso"]
 
-[ext_resource type="Script" uid="uid://2qxocb6e4fml" path="res://dev/BREAD project/boss/projectiles/projectile.gd" id="1_d0mxe"]
+[ext_resource type="Script" uid="uid://dpji0gp30c06e" path="res://dev/BREAD project/boss/projectiles/toothpick/sword_toothpick.gd" id="1_d0mxe"]
 [ext_resource type="Texture2D" uid="uid://cu6lb8f36smdh" path="res://dev/BREAD project/boss/projectiles/toothpick/toothpick.png" id="1_fg24y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d0mxe"]
@@ -62,7 +62,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"spawn_in",
-"speed": 5.0
+"speed": 30.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg24y"]
@@ -74,7 +74,7 @@ script = ExtResource("1_d0mxe")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(6.5, 1)
 sprite_frames = SubResource("SpriteFrames_t1nhy")
-animation = &"idle"
+animation = &"spawn_in"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

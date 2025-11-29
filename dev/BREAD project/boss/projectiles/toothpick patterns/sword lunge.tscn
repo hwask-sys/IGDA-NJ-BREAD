@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://3tjdvllhph6d"]
+
+[ext_resource type="Script" uid="uid://puv52gwc1gdv" path="res://dev/BREAD project/boss/projectiles/toothpick patterns/sword_lunge.gd" id="1_x3qkq"]
+[ext_resource type="Script" uid="uid://b1ywqignkydlf" path="res://dev/BREAD project/boss/projectiles/toothpick patterns/back_forth.gd" id="1_yknvb"]
+[ext_resource type="PackedScene" uid="uid://b3h6mdwwadvso" path="res://dev/BREAD project/boss/projectiles/toothpick/sword_toothpick.tscn" id="2_x3qkq"]
+
+[node name="SwordLunge" type="Node2D"]
+script = ExtResource("1_x3qkq")
+
+[node name="RigidBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(100, 0)
+script = ExtResource("1_yknvb")
+
+[node name="SwordToothpick" parent="RigidBody2D" instance=ExtResource("2_x3qkq")]
+
+[connection signal="stop_tracking" from="RigidBody2D" to="." method="_on_rigid_body_2d_stop_tracking"]
