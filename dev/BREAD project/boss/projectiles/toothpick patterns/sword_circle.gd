@@ -16,3 +16,7 @@ func _enter_tree() -> void:
 		await get_tree().create_timer(0.2).timeout
 	await get_tree().create_timer(30).timeout
 	call_deferred("queue_free")
+
+func _process(_delta: float) -> void:
+	if tracked != null:
+		global_position  = tracked.position

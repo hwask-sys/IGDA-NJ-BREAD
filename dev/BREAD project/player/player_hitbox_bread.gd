@@ -20,9 +20,9 @@ func _on_hitbox_entered(other: Area2D):
 		player_reference.damage(source.get_source_damage())
 		print(other)
 		iframes()
-	else:
-		print_rich("[color=yellow]<WARNING: A potential damage source \"" + str(source.name) + 
-		"\" that does not have a get_source_damage() method has entered the PlayerSample hitbox>")
+	#else:
+		#print_rich("[color=yellow]<WARNING: A potential damage source \"" + str(source.name) + 
+		#"\" that does not have a get_source_damage() method has entered the PlayerSample hitbox>")
 
 func iframes():
 	invincibility = true

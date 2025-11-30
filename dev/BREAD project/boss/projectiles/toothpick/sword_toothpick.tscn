@@ -72,9 +72,11 @@ size = Vector2(46, 8)
 script = ExtResource("1_d0mxe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
 position = Vector2(6.5, 1)
 sprite_frames = SubResource("SpriteFrames_t1nhy")
 animation = &"spawn_in"
+autoplay = "spawn_in"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

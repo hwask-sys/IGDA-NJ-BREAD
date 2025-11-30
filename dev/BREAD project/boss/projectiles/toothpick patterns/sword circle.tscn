@@ -3,5 +3,5 @@
 [ext_resource type="Script" uid="uid://dp2gy8l0lvrf1" path="res://dev/BREAD project/boss/projectiles/toothpick patterns/sword_circle.gd" id="1_acls8"]
 
 [node name="SwordCircle" type="Node2D"]
-position = Vector2(375, 264)
+position = Vector2(95, 93)
 script = ExtResource("1_acls8")

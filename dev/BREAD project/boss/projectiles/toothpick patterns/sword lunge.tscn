@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://b3h6mdwwadvso" path="res://dev/BREAD project/boss/projectiles/toothpick/sword_toothpick.tscn" id="2_x3qkq"]
 
 [node name="SwordLunge" type="Node2D"]
+visible = false
 script = ExtResource("1_x3qkq")
 
 [node name="RigidBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(100, 0)
+position = Vector2(80, 0)
 script = ExtResource("1_yknvb")
 
 [node name="SwordToothpick" parent="RigidBody2D" instance=ExtResource("2_x3qkq")]
