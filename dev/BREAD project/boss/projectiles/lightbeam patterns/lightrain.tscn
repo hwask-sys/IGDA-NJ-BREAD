@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://buv2do5e36cbf"]
+
+[ext_resource type="Script" uid="uid://b5iofbec08jbh" path="res://dev/BREAD project/boss/projectiles/lightbeam patterns/lightrain.gd" id="1_nsn40"]
+
+[node name="Lightrain" type="Node2D"]
+script = ExtResource("1_nsn40")

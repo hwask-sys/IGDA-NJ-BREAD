@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://m1stks4j0m5p"]
+[gd_scene load_steps=10 format=4 uid="uid://m1stks4j0m5p"]
 
-[ext_resource type="Script" uid="uid://dm52hqu27lrbd" path="res://DONOTEDITME/game/system/level.gd" id="1_txowo"]
-[ext_resource type="AudioStream" uid="uid://c87t4mso8y1dw" path="res://DONOTEDITME/assets/sounds/music/Monkeys_Spinning_Monkeys_by_Kevin_MacLeod.ogg" id="2_oy21p"]
+[ext_resource type="Script" uid="uid://dfejhkpct3xd8" path="res://dev/BREAD project/quicktested newscene/bread_platformer_sample.gd" id="1_y3rop"]
+[ext_resource type="AudioStream" uid="uid://o8obdkye2jmn" path="res://dev/BREAD project/music/B.R.E.A.D. looped .ogg" id="2_dkh7c"]
 [ext_resource type="TileSet" uid="uid://b7temyiqwjg58" path="res://DONOTEDITME/game/sample/tilesets/kenney_tileset_compilation.tres" id="7_cg6cl"]
 [ext_resource type="PackedScene" uid="uid://box0cnavbptwm" path="res://dev/BREAD project/player/player_BREAD.tscn" id="7_y3rop"]
 [ext_resource type="PackedScene" uid="uid://xrv5a4vk77ic" path="res://DONOTEDITME/game/sample/player/player_follow_camera.tscn" id="8_ejnks"]
@@ -9,9 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://cavhiq8b25tph" path="res://DONOTEDITME/menu/pause_menu.tscn" id="9_52ida"]
 [ext_resource type="PackedScene" uid="uid://c50558ro1vrqm" path="res://DONOTEDITME/game/sample/parallax_background_sample.tscn" id="10_s1yi1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkh7c"]
+size = Vector2(504, 250)
+
 [node name="TestEnvironment" type="Node2D"]
-script = ExtResource("1_txowo")
-music_stream = ExtResource("2_oy21p")
+script = ExtResource("1_y3rop")
+music_stream = ExtResource("2_dkh7c")
 
 [node name="Player" parent="." instance=ExtResource("7_y3rop")]
 unique_name_in_owner = true
@@ -36,5 +39,14 @@ unique_name_in_owner = true
 [node name="ParallaxBackground" parent="." instance=ExtResource("10_s1yi1")]
 
 [node name="Angel" parent="." instance=ExtResource("9_1sh1b")]
+z_index = -1
 position = Vector2(483, 427)
-health = null
+
+[node name="MovementBounds" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(483, 427)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementBounds"]
+unique_name_in_owner = true
+position = Vector2(-105, 46)
+shape = SubResource("RectangleShape2D_dkh7c")

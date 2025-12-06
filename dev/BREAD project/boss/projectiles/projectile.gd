@@ -10,6 +10,8 @@ extends CharacterBody2D
 
 class_name Projectile
 
+@export var clashes = true
+
 ## The damage this hazard tile deals
 @export var damage: float = 1
 
@@ -19,5 +21,5 @@ func get_sword_material() -> float:
 
 ## A method required for any object that deals object
 func get_source_damage() -> float:
-	print("dealt damage")
+	#print("dealt damage")
 	return damage

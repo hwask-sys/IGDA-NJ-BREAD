@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://chnwwasca6lwa"]
+
+[ext_resource type="Script" uid="uid://sn3i7ak3wxuq" path="res://dev/BREAD project/boss/projectiles/lightbeam/infinite_height.gd" id="1_46dq7"]
+[ext_resource type="PackedScene" uid="uid://dmg3wainbdeji" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam.tscn" id="2_njmkg"]
+
+[node name="InfiniteHeight" type="Node2D"]
+script = ExtResource("1_46dq7")
+
+[node name="Lightbeam" parent="." instance=ExtResource("2_njmkg")]
+rotation_from_horizontal = 3

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bxf2fxq7suyas"
+path="res://.godot/imported/B.R.E.A.D. intro.ogg-334e99626b60587ead503395931c05b9.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/music/B.R.E.A.D. intro.ogg"
+dest_files=["res://.godot/imported/B.R.E.A.D. intro.ogg-334e99626b60587ead503395931c05b9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

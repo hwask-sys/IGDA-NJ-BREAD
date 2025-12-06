@@ -9,6 +9,7 @@ size = Vector2(44, 34)
 
 [node name="right_slash" type="Node2D"]
 script = ExtResource("1_nb0wq")
+knockback_determiner = "right"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(31, 0)

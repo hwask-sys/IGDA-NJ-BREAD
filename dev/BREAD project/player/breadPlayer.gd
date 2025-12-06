@@ -88,13 +88,16 @@ func airdash():
 # modified for movement reasons
 func move_horizontal(input: float, delta: float) -> void:
 	if abs(input) < INPUT_THRESHOLD and abs(velocity.x) > 0:
+		print(1)
 		#velocity.x += -sign(velocity.x) * deceleration * delta
 		velocity.x = lerpf(velocity.x,0,deceleration/60 * delta)
 		if abs(velocity.x) < STOP_VELOCITY_THRSHOLD/10:
 			velocity.x = 0
 	elif abs(velocity.x) <= max_horizontal_speed:
 		velocity.x += input * acceleration * delta
+		print(2)
 	if abs(velocity.x) > max_horizontal_speed and air_drag:
+		print(3)
 		lerpf(velocity.x,max_horizontal_speed * sign(velocity.x) ,deceleration/60 * delta)
 
 func get_source_damage():
@@ -110,3 +113,16 @@ func apply_gravity(delta: float) -> void:
 			# Clamp the player's velocity to this lower bound
 			if velocity.y > max_fall_speed:
 				velocity.y = max_fall_speed
+
+func recoil(dir):
+	if dir == "left":
+		velocity.x += 500
+	if dir == "right":
+		velocity.x -= 500
+	if dir == "down":
+		velocity.y = -550
+	if dir == "up":
+		if velocity.y < 0:
+			velocity.y = 0
+		else:
+			velocity.y += 200

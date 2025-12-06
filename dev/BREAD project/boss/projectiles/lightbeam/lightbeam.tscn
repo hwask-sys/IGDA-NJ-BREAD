@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://dmg3wainbdeji"]
+
+[ext_resource type="Script" uid="uid://uxb8uxj83xng" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam.gd" id="1_sjvk3"]
+[ext_resource type="Texture2D" uid="uid://ke03xxrbvobb" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam.png" id="2_im2n3"]
+[ext_resource type="Script" uid="uid://v56hiwkum31e" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam_warning.gd" id="3_chlxr"]
+[ext_resource type="Texture2D" uid="uid://d4nqo1g4rsv7m" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam_warning.png" id="3_eeoqu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chlxr"]
+atlas = ExtResource("2_im2n3")
+region = Rect2(0, 0, 1000, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeoqu"]
+atlas = ExtResource("2_im2n3")
+region = Rect2(0, 120, 1000, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkphl"]
+atlas = ExtResource("2_im2n3")
+region = Rect2(0, 240, 1000, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emr5r"]
+atlas = ExtResource("2_im2n3")
+region = Rect2(0, 360, 1000, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8rci"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chlxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeoqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkphl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emr5r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3yp5"]
+size = Vector2(977, 100)
+
+[node name="Lightbeam" type="CharacterBody2D"]
+script = ExtResource("1_sjvk3")
+active = 1
+clashes = false
+damage = 2.0
+
+[node name="beamanim" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 2
+position = Vector2(500, 0)
+sprite_frames = SubResource("SpriteFrames_r8rci")
+autoplay = "default"
+
+[node name="collision" type="Area2D" parent="beamanim"]
+unique_name_in_owner = true
+position = Vector2(-500, 0)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="beamanim/collision"]
+unique_name_in_owner = true
+position = Vector2(512, 0)
+shape = SubResource("RectangleShape2D_u3yp5")
+disabled = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(512, 0)
+shape = SubResource("RectangleShape2D_u3yp5")
+
+[node name="warning" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(500, 0)
+texture = ExtResource("3_eeoqu")
+script = ExtResource("3_chlxr")

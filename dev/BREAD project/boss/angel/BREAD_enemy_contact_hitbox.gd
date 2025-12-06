@@ -43,7 +43,7 @@ func _on_hitbox_entered(other: Area2D):
 	print(other)
 	if other is SwordHitbox:
 		enemy_reference.damage(1)
-		print("hit for 1 damage")
+		other.get_parent().knockback()
 
 
 ## Extra code to show an editor warning if this is not attached to a PlayerSample object
