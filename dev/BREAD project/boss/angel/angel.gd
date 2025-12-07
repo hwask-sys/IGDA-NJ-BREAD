@@ -27,7 +27,7 @@ var attack_lightspam_pattern = preload("res://dev/BREAD project/boss/projectiles
 
 enum {CIRCLE, FOURSIDE, LIGHTRAIN, LIGHTSPAM}
 
-var side_phases = [preload("res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/four beam alternating.tscn"), preload("res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/rainhell.tscn")]
+var side_phases = [preload("res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/four beam alternating.tscn"), preload("res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/rainhell.tscn"), preload("res://dev/BREAD project/boss/projectiles/transition attacks/hatred/hatred.tscn")]
 
 
 var lastAttack = 9
@@ -181,4 +181,4 @@ func cooldownUpdate():
 		base_cooldown = 4
 
 func end():
-	pass
+	level_loader.end_level()

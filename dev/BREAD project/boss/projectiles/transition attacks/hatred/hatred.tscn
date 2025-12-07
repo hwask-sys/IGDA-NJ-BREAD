@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://di76yji3r6f1m"]
+
+[ext_resource type="PackedScene" uid="uid://mb6a73e2gi0s" path="res://dev/BREAD project/boss/sleeping eye/sleeping_eye.tscn" id="1_hvwcq"]
+[ext_resource type="Script" uid="uid://ceqvdtlqoo46c" path="res://dev/BREAD project/boss/projectiles/transition attacks/hatred/hatred.gd" id="1_uv8pq"]
+
+[node name="Hatred" type="Node2D"]
+script = ExtResource("1_uv8pq")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="sleeping eye" parent="Node2D" instance=ExtResource("1_hvwcq")]
+
+[connection signal="hit" from="Node2D/sleeping eye" to="." method="_on_sleeping_eye_hit"]
+[connection signal="revealed" from="Node2D/sleeping eye" to="." method="_on_sleeping_eye_revealed"]

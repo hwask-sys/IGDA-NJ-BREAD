@@ -11,6 +11,8 @@ signal hud_update
 var igothit = preload("res://dev/BREAD project/sfx/takedamage.ogg")
 var igothit2 = preload("res://dev/BREAD project/sfx/death.ogg")
 
+var dashsound = preload("res://DONOTEDITME/assets/sounds/sfx/jump.ogg")
+
 var jump_cancel = false
 var dash_available = true
 #i would have used enums but idk if you guys know how to use them
@@ -85,6 +87,7 @@ func _physics_process(delta):
 			if dir != Vector2.ZERO and not healing_state:
 				dash_state = false
 				air_drag = false
+				sound_player.play_sound_2d(dashsound, global_position)
 				animateDash.emit(DASHBUFFERTIME)
 				air_drag_timer = AIR_DRAG_WINDOW
 				velocity = max_horizontal_speed * dir.normalized() * DASHSPEEDMOD
