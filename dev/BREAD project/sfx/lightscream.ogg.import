@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://o5kcu02uhc14"
+path="res://.godot/imported/lightscream.ogg-fcd183e0345b55b59089f66e6e53f42d.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/sfx/lightscream.ogg"
+dest_files=["res://.godot/imported/lightscream.ogg-fcd183e0345b55b59089f66e6e53f42d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

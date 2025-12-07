@@ -13,5 +13,6 @@ position = Vector2(80, 0)
 script = ExtResource("1_yknvb")
 
 [node name="SwordToothpick" parent="RigidBody2D" instance=ExtResource("2_x3qkq")]
+unique_name_in_owner = true
 
 [connection signal="stop_tracking" from="RigidBody2D" to="." method="_on_rigid_body_2d_stop_tracking"]

@@ -6,6 +6,8 @@ var tracked
 
 var angel
 
+var spawn = preload("res://dev/BREAD project/sfx/swordsummon.ogg")
+
 func _enter_tree() -> void:
 	angel.phase_over.connect(kys)
 	var initial = (2 * PI / 8) 
@@ -25,7 +27,9 @@ func _enter_tree() -> void:
 			attack.delay = .8
 			attack.tracked = tracked
 			attack.rotation = initial * i
+			attack.mute()
 			add_child(attack)
+		sound_player.play_sound_2d(spawn, global_position)
 		await get_tree().create_timer(1.0).timeout
 	await get_tree().create_timer(20).timeout
 	call_deferred("queue_free")

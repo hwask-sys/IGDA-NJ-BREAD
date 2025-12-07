@@ -70,6 +70,7 @@ animations = [{
 size = Vector2(46, 8)
 
 [node name="SwordToothpick" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_d0mxe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

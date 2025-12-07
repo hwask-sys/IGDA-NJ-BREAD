@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://m1stks4j0m5p"]
+[gd_scene load_steps=39 format=4 uid="uid://m1stks4j0m5p"]
 
 [ext_resource type="Script" uid="uid://dfejhkpct3xd8" path="res://dev/BREAD project/quicktested newscene/bread_platformer_sample.gd" id="1_y3rop"]
 [ext_resource type="AudioStream" uid="uid://o8obdkye2jmn" path="res://dev/BREAD project/music/B.R.E.A.D. looped .ogg" id="2_dkh7c"]
@@ -8,9 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://c1di7j7iosvjp" path="res://dev/BREAD project/boss/angel/angel.tscn" id="9_1sh1b"]
 [ext_resource type="Script" uid="uid://hd4h6rkhxj24" path="res://dev/BREAD project/quicktested newscene/fallzone.gd" id="9_33ts2"]
 [ext_resource type="PackedScene" uid="uid://cavhiq8b25tph" path="res://DONOTEDITME/menu/pause_menu.tscn" id="9_52ida"]
+[ext_resource type="Texture2D" uid="uid://osqgotgenum0" path="res://dev/BREAD project/quicktested newscene/Black_colour.jpg" id="9_lv8pu"]
 [ext_resource type="Script" uid="uid://bkb8ioie8cnyr" path="res://dev/BREAD project/quicktested newscene/canvas_layer.gd" id="10_gu44x"]
 [ext_resource type="PackedScene" uid="uid://c50558ro1vrqm" path="res://DONOTEDITME/game/sample/parallax_background_sample.tscn" id="10_s1yi1"]
 [ext_resource type="Script" uid="uid://duqhxl2um5nww" path="res://dev/BREAD project/quicktested newscene/black_screen.gd" id="11_8wf0f"]
+[ext_resource type="Script" uid="uid://1t0qg8utlggr" path="res://dev/BREAD project/quicktested newscene/transition_phase.gd" id="12_6thg2"]
 [ext_resource type="Texture2D" uid="uid://7sskmr2npupi" path="res://dev/BREAD project/player/meters/healthbar.png" id="12_8wf0f"]
 [ext_resource type="Script" uid="uid://c4b84sb55s3gt" path="res://dev/BREAD project/quicktested newscene/healthbar.gd" id="13_vi3sc"]
 [ext_resource type="Script" uid="uid://dhbwqxwunrvl" path="res://dev/BREAD project/quicktested newscene/manabar.gd" id="14_50h6a"]
@@ -56,6 +58,14 @@ region = Rect2(672, 0, 96, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vux1h"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi3sc")
+}],
+"loop": false,
+"name": &"0",
+"speed": 0.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vi3sc")
@@ -275,6 +285,13 @@ unique_name_in_owner = true
 position = Vector2(-105, 46)
 shape = SubResource("RectangleShape2D_dkh7c")
 
+[node name="transition phase" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+scale = Vector2(100, 100)
+texture = ExtResource("9_lv8pu")
+script = ExtResource("12_6thg2")
+
 [node name="fallzone" type="Area2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(483, 427)
@@ -310,5 +327,8 @@ sprite_frames = SubResource("SpriteFrames_2fukh")
 animation = &"0"
 script = ExtResource("14_50h6a")
 
+[connection signal="brighten" from="." to="transition phase" method="_on_test_environment_brighten"]
+[connection signal="darken" from="." to="transition phase" method="_on_test_environment_darken"]
 [connection signal="hud_update" from="Player" to="CanvasLayer" method="_on_player_hud_update"]
+[connection signal="phase_over" from="Angel" to="." method="_on_angel_phase_over"]
 [connection signal="area_entered" from="fallzone" to="fallzone" method="_on_area_entered"]

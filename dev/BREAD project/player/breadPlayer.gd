@@ -8,6 +8,9 @@ var healing_state = false
 
 signal hud_update
 
+var igothit = preload("res://dev/BREAD project/sfx/takedamage.ogg")
+var igothit2 = preload("res://dev/BREAD project/sfx/death.ogg")
+
 var jump_cancel = false
 var dash_available = true
 #i would have used enums but idk if you guys know how to use them
@@ -17,6 +20,8 @@ const DASHBUFFERTIME_MAX = .5
 var dash_buffer = DASHBUFFERTIME
 const DASHSPEEDMOD = 1.5
 var stun = false
+
+signal animateDash
 
 #air drag for shmovement
 const AIR_DRAG_WINDOW = 0.2
@@ -77,15 +82,20 @@ func _physics_process(delta):
 			else:
 				dir.y = 0
 			
-			if dir != Vector2.ZERO:
+			if dir != Vector2.ZERO and not healing_state:
 				dash_state = false
 				air_drag = false
+				animateDash.emit(DASHBUFFERTIME)
 				air_drag_timer = AIR_DRAG_WINDOW
 				velocity = max_horizontal_speed * dir.normalized() * DASHSPEEDMOD
-			
+		
+		else:
+			animateDash.emit(dash_buffer)
+		
 		#for when the hover window ends
 		if dash_buffer <= -DASHBUFFERTIME_MAX:
 			dash_state = false
+			animateDash.emit(DASHBUFFERTIME)
 			velocity.x = 0
 			actionable = true
 		
@@ -135,6 +145,7 @@ func apply_gravity(delta: float) -> void:
 
 func fall_damage():
 	damage(1)
+	get_node("PlayerHitboxBread").fallenIFrames()
 	get_parent().blackscreen()
 	actionable = false
 
@@ -159,7 +170,7 @@ func recoil(dir):
 	if dir == "right":
 		velocity.x -= 500
 	if dir == "down":
-		velocity.y = -550
+		velocity.y = -450
 		dash_available = true
 	if dir == "up":
 		if velocity.y < 0:
@@ -173,7 +184,10 @@ func get_mana():
 		hud_update.emit(current_health, mana)
 
 func damage(amount: float) -> void:
+	sound_player.play_sound_2d(igothit, global_position)
+	sound_player.play_sound_2d(igothit2, global_position)
 	healing_state = false
+	$"%Heal Timer".stop()
 	sound_player.play_sound(hit_sound, global_position) # Assume when this is being called we are taking damage
 	current_health -= amount
 	current_health = clampf(current_health, 0, max_health)
@@ -187,9 +201,9 @@ func _on_timer_started() -> void:
 func _on_timer_timeout() -> void:
 	doFlip = true
 
-
-func _on_heal_timer_timeout() -> void:
+func _on_heal_timer_done_healing() -> void:
 	if healing_state:
+		dash_available = true
 		current_health += 3
 		healing_state = false
 		actionable = true

@@ -9,6 +9,9 @@ var player
 var fadein = false
 var fadeout = false
 
+var scratch = preload("res://dev/BREAD project/sfx/breadhit.ogg")
+var scream = preload("res://dev/BREAD project/sfx/monstah.ogg")
+var lightscream = preload("res://dev/BREAD project/sfx/lightscream.ogg")
 
 var phase = 1
 var invul = false
@@ -24,10 +27,11 @@ var attack_lightspam_pattern = preload("res://dev/BREAD project/boss/projectiles
 
 enum {CIRCLE, FOURSIDE, LIGHTRAIN, LIGHTSPAM}
 
-var side_phases = [preload("res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/four beam alternating.tscn")]
+var side_phases = [preload("res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/four beam alternating.tscn"), preload("res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/rainhell.tscn")]
 
 
 var lastAttack = 9
+var lastLastAttack = 9
 
 var beamcount = 3
 
@@ -43,10 +47,13 @@ func _ready() -> void:
 
 func damage(hp):
 	if !invul:
+		sound_player.play_sound_2d(scratch, global_position)
 		health -= hp
 		if health <= 0:
 			invul = true
 			health = 100
+			sound_player.play_sound_2d(scream, global_position)
+			sound_player.play_sound_2d(lightscream, global_position)
 			phase_over.emit()
 			var temp = get_node("EnemyContactHitbox")
 			temp.monitorable = false
@@ -57,6 +64,10 @@ func damage(hp):
 
 func random_attack():
 	var temp = randi_range(0,3)
+	while temp == lastAttack and temp == lastLastAttack:
+		temp = randi_range(0,3)
+	lastLastAttack = lastAttack
+	lastAttack = temp
 	if temp == CIRCLE:
 		attack_circle()
 	elif temp == FOURSIDE:
@@ -139,22 +150,35 @@ func _on_phase_over() -> void:
 		phase_transition()
 
 func waitComeBackINeedYou(gp):
+	phase += 1
+	sound_player.play_sound_2d(lightscream, global_position)
+	cooldownUpdate()
 	rand_move_point = gp
 	global_position = gp
 	fadein = true
 	invul = false
+	get_node("EnemyContactHitbox").invul = false
 	$"Attack Timer".wait_time = base_cooldown / 2.0
 	$"Movement Timer".wait_time = 4
 	$"Movement Timer".start()
 	$"Attack Timer".start()
 
 func phase_transition():
+	get_node("EnemyContactHitbox").invul = true
 	var nextphase = side_phases[phase - 1]
 	var temp = nextphase.instantiate()
+	temp.tracked = player
+	temp.bounds = scene.bounds
 	temp.global_position = scene.respawn.global_position
 	temp.global_position.y -= 100
 	call_deferred("add_sibling",temp)
 	
+
+func cooldownUpdate():
+	if phase != 4:
+		base_cooldown = 7
+	else:
+		base_cooldown = 4
 
 func end():
 	pass

@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://mb6a73e2gi0s"]
+[gd_scene load_steps=6 format=3 uid="uid://mb6a73e2gi0s"]
 
 [ext_resource type="Script" uid="uid://ucjklt6h1obh" path="res://dev/BREAD project/boss/sleeping eye/sleeping_eye.gd" id="1_q0cdc"]
 [ext_resource type="Texture2D" uid="uid://bcireogkwue5n" path="res://dev/BREAD project/boss/sleeping eye/sleeping eye.png" id="2_n354g"]
 [ext_resource type="Script" uid="uid://do0lhgavigehl" path="res://dev/BREAD project/boss/angel/BREAD_enemy_contact_hitbox.gd" id="4_2wm0a"]
+[ext_resource type="Script" uid="uid://wt33x2h7pata" path="res://dev/BREAD project/boss/sleeping eye/heartbeat.gd" id="4_n354g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sktkc"]
 size = Vector2(28, 18)
 
 [node name="sleeping eye" type="CharacterBody2D"]
 visible = false
+z_index = 4
 script = ExtResource("1_q0cdc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -30,4 +32,9 @@ wait_time = 15.0
 one_shot = true
 autostart = true
 
+[node name="heartbeat" type="Timer" parent="."]
+script = ExtResource("4_n354g")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="heartbeat" method="_on_timer_timeout"]
+[connection signal="timeout" from="heartbeat" to="." method="_on_heartbeat_timeout"]

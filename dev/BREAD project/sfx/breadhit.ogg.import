@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dsqt1t8kq106v"
+path="res://.godot/imported/breadhit.ogg-adf6139292a63c72ac3bd46217b9021e.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/sfx/breadhit.ogg"
+dest_files=["res://.godot/imported/breadhit.ogg-adf6139292a63c72ac3bd46217b9021e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

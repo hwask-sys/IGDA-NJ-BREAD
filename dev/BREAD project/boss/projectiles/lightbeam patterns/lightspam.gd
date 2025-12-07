@@ -18,6 +18,7 @@ func _enter_tree() -> void:
 		var x = randi_range(int(rect.global_position.x)-int(rect.shape.size.x/2), int(rect.global_position.x)+int(rect.shape.size.x/2))
 		var instance = beam.instantiate()
 		instance.global_position.x = x
+		
 		instance.tracked = tracked
 		instance.active = 0.5
 		add_child(instance)

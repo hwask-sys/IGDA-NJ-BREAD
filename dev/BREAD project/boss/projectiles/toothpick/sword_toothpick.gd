@@ -2,7 +2,13 @@ extends Projectile
 
 class_name Toothpick
 
+var spawn = preload("res://dev/BREAD project/sfx/swordsummon.ogg")
+
+@export var muted = false
+
 func _enter_tree() -> void:
+	if not muted:
+		sound_player.play_sound_2d(spawn, global_position)
 	var ani = get_node("AnimatedSprite2D")
 	ani.play("spawn_in")
 

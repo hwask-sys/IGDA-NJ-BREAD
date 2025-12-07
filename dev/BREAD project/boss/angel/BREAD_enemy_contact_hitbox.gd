@@ -9,6 +9,8 @@ extends Area2D
 ## to call when a player/player hurtbox projectile enters this hitbox.
 class_name EnemyHitbox_BREAD
 
+var invul = false
+
 @onready var enemy_reference = $"../"
 
 # Called when the node enters the scene tree for the first time.
@@ -40,7 +42,7 @@ func _on_hitbox_entered(other: Area2D):
 ##I actually commented that all out bc im lazy
 
 func _on_hitbox_entered(other: Area2D):
-	if other is SwordHitbox:
+	if other is SwordHitbox and !invul:
 		enemy_reference.damage(1)
 		other.get_parent().get_mana()
 		other.get_parent().knockback()

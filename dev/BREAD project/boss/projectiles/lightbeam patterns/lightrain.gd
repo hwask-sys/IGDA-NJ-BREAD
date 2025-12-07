@@ -18,6 +18,7 @@ func _enter_tree() -> void:
 	for j in beam_loops:
 		for i in beam_count:
 			var x = randi_range(int(rect.global_position.x)-int(rect.shape.size.x/2), int(rect.global_position.x)+int(rect.shape.size.x/2))
+			#print("from " + str(int(bounds.global_position.x)-int(bounds.shape.size.x/2)) + " to " + str(int(bounds.global_position.x)+int(bounds.shape.size.x/2)))
 			var instance = beam.instantiate()
 			instance.global_position.x = x
 			instance.tracked = tracked

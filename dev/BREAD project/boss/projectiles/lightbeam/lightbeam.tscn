@@ -78,6 +78,7 @@ shape = SubResource("RectangleShape2D_u3yp5")
 [node name="warning" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 2
 position = Vector2(500, 0)
 texture = ExtResource("3_eeoqu")
 script = ExtResource("3_chlxr")

@@ -7,6 +7,9 @@ var locked_position = Vector2.ZERO
 
 var delay = 1.6
 
+func mute():
+	$%SwordToothpick.muted = true
+
 func _enter_tree() -> void:
 	global_position  = tracked.position
 	visible = true

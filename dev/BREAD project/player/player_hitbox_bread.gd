@@ -4,13 +4,14 @@ extends PlayerHitbox
 class_name PlayerHitboxBread
 
 var invincibility = false
+var fallen = false
 
 @onready var anim = get_parent().get_node("Sprite2D")
 
 func _on_hitbox_entered(other: Area2D):
 	#print("entered")
 	## for i-frames
-	if invincibility:
+	if invincibility or fallen:
 		return
 	
 	# Ignore hitboxes
@@ -34,6 +35,8 @@ func iframes():
 
 func fallenIFrames():
 	anim.invulAnim()
-	await get_tree().create_timer(5).timeout
+	fallen = true
+	await get_tree().create_timer(4).timeout
 	invincibility = false
+	fallen = false
 	anim.invulAnimStop()

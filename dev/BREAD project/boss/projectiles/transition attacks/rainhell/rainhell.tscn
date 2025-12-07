@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5bkmy2jd2qm5"]
+
+[ext_resource type="Script" uid="uid://b04xxjkiqwtsa" path="res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/rainhell.gd" id="1_qyg8c"]
+[ext_resource type="PackedScene" uid="uid://mb6a73e2gi0s" path="res://dev/BREAD project/boss/sleeping eye/sleeping_eye.tscn" id="2_052eh"]
+[ext_resource type="Script" uid="uid://mcfl183btufj" path="res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/beam_handler.gd" id="3_8g51y"]
+[ext_resource type="Script" uid="uid://dqwmyw53a060f" path="res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/timer.gd" id="4_at6kt"]
+[ext_resource type="Script" uid="uid://d0eycys2s4tmu" path="res://dev/BREAD project/boss/projectiles/transition attacks/rainhell/swords.gd" id="5_052eh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyg8c"]
+size = Vector2(34, 38)
+
+[node name="Rainhell" type="Node2D"]
+script = ExtResource("1_qyg8c")
+
+[node name="beam handler" type="Node2D" parent="."]
+script = ExtResource("3_8g51y")
+
+[node name="Timer" type="Timer" parent="beam handler"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+script = ExtResource("4_at6kt")
+
+[node name="bouncing" type="CharacterBody2D" parent="."]
+
+[node name="sleeping eye" parent="bouncing" instance=ExtResource("2_052eh")]
+
+[node name="Node2D" type="CollisionShape2D" parent="bouncing"]
+shape = SubResource("RectangleShape2D_qyg8c")
+
+[node name="swords" type="Node2D" parent="."]
+script = ExtResource("5_052eh")
+
+[node name="swordtimer" type="Timer" parent="swords"]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="beam handler/Timer" to="beam handler" method="_on_timer_timeout"]
+[connection signal="timeout" from="beam handler/Timer" to="beam handler/Timer" method="_on_timeout"]
+[connection signal="hit" from="bouncing/sleeping eye" to="." method="_on_sleeping_eye_hit"]
+[connection signal="timeout" from="swords/swordtimer" to="swords" method="_on_swordtimer_timeout"]

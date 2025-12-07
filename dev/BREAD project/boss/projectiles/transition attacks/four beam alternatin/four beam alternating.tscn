@@ -18,35 +18,43 @@ script = ExtResource("1_g4umu")
 [node name="SwordToothpick" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(67, 7.98967e-07)
 rotation = -1.5707964
+muted = true
 
 [node name="SwordToothpick2" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(47.376156, 47.37615)
 rotation = -0.78539824
+muted = true
 
 [node name="SwordToothpick3" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(47.37615, -47.376156)
 rotation = -2.3561945
+muted = true
 
 [node name="SwordToothpick4" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(-2.129696e-06, -67)
 rotation = 3.1415927
+muted = true
 
 [node name="SwordToothpick5" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(-67, -2.928663e-06)
 rotation = 1.5707964
+muted = true
 
 [node name="SwordToothpick6" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(-47.376152, -47.376152)
 rotation = 2.3561945
 scale = Vector2(0.99999994, 0.99999994)
+muted = true
 
 [node name="SwordToothpick7" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(-47.376152, 47.376152)
 rotation = 0.7853982
 scale = Vector2(0.99999994, 0.99999994)
+muted = true
 
 [node name="SwordToothpick8" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
 position = Vector2(0, 67)
+muted = true
 
 [node name="Rotating Swords2" type="Node2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -55,32 +63,39 @@ script = ExtResource("1_g4umu")
 [node name="SwordToothpick" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(67, 7.98967e-07)
 rotation = -1.5707964
+muted = true
 
 [node name="SwordToothpick2" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(47.376156, 47.37615)
 rotation = -0.78539824
+muted = true
 
 [node name="SwordToothpick3" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(47.37615, -47.376156)
 rotation = -2.3561945
+muted = true
 
 [node name="SwordToothpick4" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(-2.129696e-06, -67)
 rotation = 3.1415927
+muted = true
 
 [node name="SwordToothpick5" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(-67, -2.928663e-06)
 rotation = 1.5707964
+muted = true
 
 [node name="SwordToothpick6" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(-47.376152, -47.376152)
 rotation = 2.3561945
 scale = Vector2(0.99999994, 0.99999994)
+muted = true
 
 [node name="SwordToothpick7" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(-47.376152, 47.376152)
 rotation = 0.7853982
 scale = Vector2(0.99999994, 0.99999994)
+muted = true
 
 [node name="SwordToothpick8" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
 position = Vector2(0, 67)

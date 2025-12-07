@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://sl2685cdfknv"
+path="res://.godot/imported/death.ogg-ecbe083f988030c100779dc9bada7c70.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/sfx/death.ogg"
+dest_files=["res://.godot/imported/death.ogg-ecbe083f988030c100779dc9bada7c70.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

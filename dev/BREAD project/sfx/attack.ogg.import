@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bfw4hvvr7ov17"
+path="res://.godot/imported/attack.ogg-ab29bc54f93859158bd42b78935bf124.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/sfx/attack.ogg"
+dest_files=["res://.godot/imported/attack.ogg-ab29bc54f93859158bd42b78935bf124.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

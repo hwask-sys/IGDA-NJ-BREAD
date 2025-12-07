@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://blg5td14w0mbo"
+path="res://.godot/imported/metalhit.ogg-027f16a41eb31274a9406d3945299724.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/sfx/metalhit.ogg"
+dest_files=["res://.godot/imported/metalhit.ogg-027f16a41eb31274a9406d3945299724.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

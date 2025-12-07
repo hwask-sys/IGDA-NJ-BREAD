@@ -1,11 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://box0cnavbptwm"]
+[gd_scene load_steps=18 format=3 uid="uid://box0cnavbptwm"]
 
 [ext_resource type="Script" uid="uid://dey0junlb6lc1" path="res://dev/BREAD project/player/breadPlayer.gd" id="1_5i2ua"]
 [ext_resource type="Texture2D" uid="uid://ofoqedjacn88" path="res://DONOTEDITME/assets/sprites/player/jammy.png" id="2_68dig"]
 [ext_resource type="Script" uid="uid://cl32nppohqflb" path="res://dev/BREAD project/player/sprite_2d.gd" id="3_a3h4o"]
 [ext_resource type="PackedScene" uid="uid://desdea2rpmnwu" path="res://dev/BREAD project/player/player_hitbox_BREAD.tscn" id="3_qncrj"]
 [ext_resource type="Script" uid="uid://b1wij1fn2uice" path="res://dev/BREAD project/player/sword/knife_positions.gd" id="4_s0dwc"]
+[ext_resource type="Texture2D" uid="uid://dj5ospsgj6838" path="res://dev/BREAD project/player/meters/healingbar.png" id="7_s0dwc"]
+[ext_resource type="Script" uid="uid://dga47kembvvvv" path="res://dev/BREAD project/player/healing_bar.gd" id="8_e4p5l"]
+[ext_resource type="Script" uid="uid://dgqya822nhh8x" path="res://dev/BREAD project/player/dash_anim.gd" id="9_7quac"]
 [ext_resource type="Script" uid="uid://b664o6xi3tv1s" path="res://dev/BREAD project/player/attcking_timer.gd" id="9_e4p5l"]
+[ext_resource type="Texture2D" uid="uid://mj6mxkcna38y" path="res://dev/BREAD project/player/meters/movementbar.png" id="9_pj4wi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md56h"]
 size = Vector2(22, 24)
@@ -134,13 +138,46 @@ wait_time = 0.28
 one_shot = true
 script = ExtResource("9_e4p5l")
 
-[node name="Heal Timer" type="Timer" parent="."]
+[node name="Heal Timer" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-wait_time = 2.0
+modulate = Color(1, 1, 1, 0.75000006)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("7_s0dwc")
+script = ExtResource("8_e4p5l")
 
+[node name="Dash Anim" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.75000006)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("9_pj4wi")
+script = ExtResource("9_7quac")
+
+[connection signal="animateDash" from="." to="Dash Anim" method="_on_player_animate_dash"]
 [connection signal="attacked" from="knife_positions" to="knife_positions" method="_on_attacked"]
 [connection signal="attacked" from="knife_positions" to="knife_positions/Timer" method="_on_knife_positions_attacked"]
 [connection signal="started" from="knife_positions/Timer" to="." method="_on_timer_started"]
 [connection signal="timeout" from="knife_positions/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="knife_positions/Timer" to="knife_positions" method="_on_timer_timeout"]
-[connection signal="timeout" from="Heal Timer" to="." method="_on_heal_timer_timeout"]
+[connection signal="doneHealing" from="Heal Timer" to="." method="_on_heal_timer_done_healing"]

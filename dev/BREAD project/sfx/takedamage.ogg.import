@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dy4x7mqtr563m"
+path="res://.godot/imported/takedamage.ogg-04389339a65e1197f175251c5ab9e820.oggvorbisstr"
+
+[deps]
+
+source_file="res://dev/BREAD project/sfx/takedamage.ogg"
+dest_files=["res://.godot/imported/takedamage.ogg-04389339a65e1197f175251c5ab9e820.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
