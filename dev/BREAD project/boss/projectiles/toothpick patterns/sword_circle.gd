@@ -4,7 +4,10 @@ var the_blade = preload("res://dev/BREAD project/boss/projectiles/toothpick patt
 
 var tracked
 
+var angel
+
 func _enter_tree() -> void:
+	angel.phase_over.connect(kys)
 	var initial = (2 * PI / 8) * randi_range(0,7)
 	var choices = [-1, 1]
 	var direction = choices[randi() % choices.size()]
@@ -20,3 +23,6 @@ func _enter_tree() -> void:
 func _process(_delta: float) -> void:
 	if tracked != null:
 		global_position  = tracked.position
+
+func kys():
+	call_deferred("queue_free")

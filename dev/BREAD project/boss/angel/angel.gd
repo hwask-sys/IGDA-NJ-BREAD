@@ -1,9 +1,18 @@
 extends CharacterBody2D
 
-@export var health := 77
+@export var health := 100
 @onready var scene = get_parent()
 var player
 
+#self explanitory
+@onready var ani = get_node("AnimatedSprite2D")
+var fadein = false
+var fadeout = false
+
+
+var phase = 1
+var invul = false
+signal phase_over
 
 var rand_move_point = global_position
 var move_speed = 400
@@ -15,11 +24,15 @@ var attack_lightspam_pattern = preload("res://dev/BREAD project/boss/projectiles
 
 enum {CIRCLE, FOURSIDE, LIGHTRAIN, LIGHTSPAM}
 
+var side_phases = [preload("res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/four beam alternating.tscn")]
+
+
 var lastAttack = 9
 
 var beamcount = 3
 
-var base_cooldown = 6
+## lowers to 6 eventually
+var base_cooldown = 8
 
 func _ready() -> void:
 	rand_move_point = global_position
@@ -29,7 +42,18 @@ func _ready() -> void:
 	$"%Movement Timer".start()
 
 func damage(hp):
-	health -= hp
+	if !invul:
+		health -= hp
+		if health <= 0:
+			invul = true
+			health = 100
+			phase_over.emit()
+			var temp = get_node("EnemyContactHitbox")
+			temp.monitorable = false
+			temp.monitoring = false
+			fadeout = true
+			
+	
 
 func random_attack():
 	var temp = randi_range(0,3)
@@ -45,6 +69,7 @@ func random_attack():
 func attack_circle():
 	var attack = attack_circle_pattern.instantiate()
 	attack.tracked = player
+	attack.angel = self
 	add_sibling(attack)
 	$"Attack Timer".wait_time = base_cooldown
 	$"Attack Timer".start()
@@ -52,6 +77,7 @@ func attack_circle():
 func fourside():
 	var attack = attack_fourside_pattern.instantiate()
 	attack.tracked = player
+	attack.angel = self
 	add_sibling(attack)
 	$"Attack Timer".wait_time = base_cooldown
 	$"Attack Timer".start()
@@ -60,6 +86,7 @@ func lightrain():
 	var attack = attack_lightrain_pattern.instantiate()
 	attack.bounds = scene.bounds
 	attack.tracked = player
+	attack.angel = self
 	add_sibling(attack)
 	$"Attack Timer".wait_time = base_cooldown
 	$"Attack Timer".start()
@@ -68,6 +95,7 @@ func lightspam():
 	var attack = attack_lightspam_pattern.instantiate()
 	attack.bounds = scene.bounds
 	attack.tracked = player
+	attack.angel = self
 	add_sibling(attack)
 	$"Attack Timer".wait_time = base_cooldown * 1.5
 	$"Attack Timer".start()
@@ -78,15 +106,55 @@ func _on_movement_timer_timeout() -> void:
 	var y = randi_range(int(rect.global_position.y)-int(rect.shape.size.y/2), int(rect.global_position.y)+int(rect.shape.size.y/2))
 	rand_move_point = Vector2(x,y)
 
-func _physics_process(_delta: float) -> void:
-	var direction = global_position.direction_to(rand_move_point)
-	if global_position.distance_to(rand_move_point) > 10:
-		velocity = direction * move_speed
+func _physics_process(delta: float) -> void:
+	
+	if fadeout:
+		ani.modulate.a -= delta * 2
+		if ani.modulate.a <= 0:
+			ani.modulate.a = 0
+			fadeout = false
+	elif fadein:
+		ani.modulate.a += delta * 2
+		if ani.modulate.a >= 1:
+			ani.modulate.a = 1
+			fadein = false
 	else:
-		velocity = Vector2.ZERO
-		if $"%Movement Timer".is_stopped():
-			$"%Movement Timer".start()
+		var direction = global_position.direction_to(rand_move_point)
+		if global_position.distance_to(rand_move_point) > 10:
+			velocity = direction * move_speed
+		else:
+			velocity = Vector2.ZERO
+			if $"%Movement Timer".is_stopped():
+				$"%Movement Timer".start()
 	move_and_slide()
 
 func _on_attack_timer_timeout() -> void:
 	random_attack()
+
+
+func _on_phase_over() -> void:
+	if phase == 4:
+		end()
+	else:
+		phase_transition()
+
+func waitComeBackINeedYou(gp):
+	rand_move_point = gp
+	global_position = gp
+	fadein = true
+	invul = false
+	$"Attack Timer".wait_time = base_cooldown / 2.0
+	$"Movement Timer".wait_time = 4
+	$"Movement Timer".start()
+	$"Attack Timer".start()
+
+func phase_transition():
+	var nextphase = side_phases[phase - 1]
+	var temp = nextphase.instantiate()
+	temp.global_position = scene.respawn.global_position
+	temp.global_position.y -= 100
+	call_deferred("add_sibling",temp)
+	
+
+func end():
+	pass

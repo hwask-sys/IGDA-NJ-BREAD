@@ -2,8 +2,9 @@ extends Level
 
 var bounds
 @onready var HUD = $CanvasLayer
-
 @onready var respawn = get_node("Respawn")
+
+@onready var angel = get_node("Angel")
 
 func _ready():
 	bounds = $%CollisionShape2D
@@ -15,3 +16,6 @@ func blackscreen():
 	%Player.global_position = get_node("Respawn").global_position
 	await get_tree().create_timer(0.5).timeout
 	%Player.respawned()
+
+func respawn_angel(gp):
+	angel.waitComeBackINeedYou(gp)

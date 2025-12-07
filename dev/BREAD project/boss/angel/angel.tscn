@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1di7j7iosvjp"]
+[gd_scene load_steps=12 format=3 uid="uid://c1di7j7iosvjp"]
 
 [ext_resource type="Texture2D" uid="uid://dwfhqlcaxg2o4" path="res://dev/BREAD project/boss/angel/sprites/epic_angel_bread_thing_sprite_sheet.png" id="1_ag58y"]
 [ext_resource type="Script" uid="uid://c87kooi8bd2ab" path="res://dev/BREAD project/boss/angel/angel.gd" id="1_c1p4y"]
 [ext_resource type="Script" uid="uid://do0lhgavigehl" path="res://dev/BREAD project/boss/angel/BREAD_enemy_contact_hitbox.gd" id="2_632qx"]
 [ext_resource type="Script" uid="uid://dgr80rwo63ufd" path="res://dev/BREAD project/boss/angel/movement_timer.gd" id="4_wwdvs"]
+[ext_resource type="Script" uid="uid://cets5p7p562lm" path="res://dev/BREAD project/boss/angel/attack_timer.gd" id="5_nx6tr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_632qx"]
 atlas = ExtResource("1_ag58y")
@@ -51,7 +52,6 @@ size = Vector2(64, 64)
 
 [node name="Angel" type="CharacterBody2D"]
 script = ExtResource("1_c1p4y")
-health = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gvjjc")
@@ -81,7 +81,11 @@ script = ExtResource("4_wwdvs")
 [node name="Attack Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+script = ExtResource("5_nx6tr")
 
+[connection signal="phase_over" from="." to="." method="_on_phase_over"]
+[connection signal="phase_over" from="." to="Movement Timer" method="_on_angel_phase_over"]
+[connection signal="phase_over" from="." to="Attack Timer" method="_on_angel_phase_over"]
 [connection signal="timeout" from="Movement Timer" to="." method="_on_movement_timer_timeout"]
 [connection signal="timeout" from="Movement Timer" to="Movement Timer" method="_on_timeout"]
 [connection signal="timeout" from="Attack Timer" to="." method="_on_attack_timer_timeout"]

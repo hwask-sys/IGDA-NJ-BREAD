@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3h6mdwwadvso"]
+[gd_scene load_steps=13 format=3 uid="uid://b3h6mdwwadvso"]
 
 [ext_resource type="Script" uid="uid://dpji0gp30c06e" path="res://dev/BREAD project/boss/projectiles/toothpick/sword_toothpick.gd" id="1_d0mxe"]
 [ext_resource type="Texture2D" uid="uid://cu6lb8f36smdh" path="res://dev/BREAD project/boss/projectiles/toothpick/toothpick.png" id="1_fg24y"]
+[ext_resource type="Script" uid="uid://dc1xgxp1nfyjs" path="res://dev/BREAD project/boss/projectiles/toothpick/area_2d.gd" id="3_5t6wx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d0mxe"]
 atlas = ExtResource("1_fg24y")
@@ -83,8 +84,13 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_fg24y")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 12
+collision_mask = 45
+script = ExtResource("3_5t6wx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_fg24y")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_entered"]
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]

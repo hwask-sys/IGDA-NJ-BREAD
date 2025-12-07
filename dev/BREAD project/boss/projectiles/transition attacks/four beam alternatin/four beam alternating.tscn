@@ -1,0 +1,146 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgs1ayc0s2jf7"]
+
+[ext_resource type="Script" uid="uid://cnb7adg7vnccw" path="res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/four_beam_alternating.gd" id="1_42dhi"]
+[ext_resource type="Script" uid="uid://so5b28niucdm" path="res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/rotating_swords.gd" id="1_g4umu"]
+[ext_resource type="PackedScene" uid="uid://b3h6mdwwadvso" path="res://dev/BREAD project/boss/projectiles/toothpick/sword_toothpick.tscn" id="2_26ryh"]
+[ext_resource type="Script" uid="uid://bivavkvywo676" path="res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/rotating_beams.gd" id="3_0t8r8"]
+[ext_resource type="Script" uid="uid://cpdb6isdmpewd" path="res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/evens.gd" id="4_os6mr"]
+[ext_resource type="Script" uid="uid://bk0xeowygp87l" path="res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/beam_summoner.gd" id="4_tblqn"]
+[ext_resource type="Script" uid="uid://y4c2apn7txjl" path="res://dev/BREAD project/boss/projectiles/transition attacks/four beam alternatin/odds.gd" id="6_g73sk"]
+[ext_resource type="PackedScene" uid="uid://mb6a73e2gi0s" path="res://dev/BREAD project/boss/sleeping eye/sleeping_eye.tscn" id="7_npycg"]
+
+[node name="FourBeamAlternating" type="Node2D"]
+script = ExtResource("1_42dhi")
+
+[node name="Rotating Swords" type="Node2D" parent="."]
+script = ExtResource("1_g4umu")
+
+[node name="SwordToothpick" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(67, 7.98967e-07)
+rotation = -1.5707964
+
+[node name="SwordToothpick2" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(47.376156, 47.37615)
+rotation = -0.78539824
+
+[node name="SwordToothpick3" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(47.37615, -47.376156)
+rotation = -2.3561945
+
+[node name="SwordToothpick4" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(-2.129696e-06, -67)
+rotation = 3.1415927
+
+[node name="SwordToothpick5" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(-67, -2.928663e-06)
+rotation = 1.5707964
+
+[node name="SwordToothpick6" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(-47.376152, -47.376152)
+rotation = 2.3561945
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SwordToothpick7" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(-47.376152, 47.376152)
+rotation = 0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SwordToothpick8" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
+position = Vector2(0, 67)
+
+[node name="Rotating Swords2" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_g4umu")
+
+[node name="SwordToothpick" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(67, 7.98967e-07)
+rotation = -1.5707964
+
+[node name="SwordToothpick2" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(47.376156, 47.37615)
+rotation = -0.78539824
+
+[node name="SwordToothpick3" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(47.37615, -47.376156)
+rotation = -2.3561945
+
+[node name="SwordToothpick4" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(-2.129696e-06, -67)
+rotation = 3.1415927
+
+[node name="SwordToothpick5" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(-67, -2.928663e-06)
+rotation = 1.5707964
+
+[node name="SwordToothpick6" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(-47.376152, -47.376152)
+rotation = 2.3561945
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SwordToothpick7" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(-47.376152, 47.376152)
+rotation = 0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SwordToothpick8" parent="Rotating Swords2" instance=ExtResource("2_26ryh")]
+position = Vector2(0, 67)
+
+[node name="Rotating Beams" type="Node2D" parent="."]
+script = ExtResource("3_0t8r8")
+
+[node name="evens" type="Node2D" parent="Rotating Beams"]
+script = ExtResource("4_os6mr")
+
+[node name="beam summoner" type="Node2D" parent="Rotating Beams/evens"]
+position = Vector2(67, 0)
+script = ExtResource("4_tblqn")
+
+[node name="beam summoner2" type="Node2D" parent="Rotating Beams/evens"]
+position = Vector2(-67, 0)
+rotation = 3.1415927
+script = ExtResource("4_tblqn")
+
+[node name="beam summoner3" type="Node2D" parent="Rotating Beams/evens"]
+position = Vector2(0, 67)
+rotation = 1.5707964
+script = ExtResource("4_tblqn")
+
+[node name="beam summoner4" type="Node2D" parent="Rotating Beams/evens"]
+position = Vector2(0, -67)
+rotation = 4.712389
+script = ExtResource("4_tblqn")
+
+[node name="odds" type="Node2D" parent="Rotating Beams"]
+rotation = 0.7853982
+script = ExtResource("6_g73sk")
+
+[node name="beam summoner" type="Node2D" parent="Rotating Beams/odds"]
+position = Vector2(67, 0)
+script = ExtResource("4_tblqn")
+
+[node name="beam summoner2" type="Node2D" parent="Rotating Beams/odds"]
+position = Vector2(-67, 0)
+rotation = 3.1415927
+script = ExtResource("4_tblqn")
+
+[node name="beam summoner3" type="Node2D" parent="Rotating Beams/odds"]
+position = Vector2(0, 67)
+rotation = 1.5707964
+script = ExtResource("4_tblqn")
+
+[node name="beam summoner4" type="Node2D" parent="Rotating Beams/odds"]
+position = Vector2(0, -67)
+rotation = 4.712389
+script = ExtResource("4_tblqn")
+
+[node name="buffer for later consistency" type="Node2D" parent="."]
+
+[node name="sleeping eye" parent="buffer for later consistency" instance=ExtResource("7_npycg")]
+
+[connection signal="evens" from="Rotating Beams" to="Rotating Beams" method="_on_evens"]
+[connection signal="evens" from="Rotating Beams" to="Rotating Beams/evens" method="_on_rotating_beams_evens"]
+[connection signal="odds" from="Rotating Beams" to="Rotating Beams" method="_on_odds"]
+[connection signal="odds" from="Rotating Beams" to="Rotating Beams/odds" method="_on_rotating_beams_odds"]
+[connection signal="hit" from="buffer for later consistency/sleeping eye" to="." method="_on_sleeping_eye_hit"]
+[connection signal="revealed" from="buffer for later consistency/sleeping eye" to="Rotating Swords" method="_on_sleeping_eye_revealed"]
+[connection signal="revealed" from="buffer for later consistency/sleeping eye" to="Rotating Swords2" method="_on_sleeping_eye_revealed"]

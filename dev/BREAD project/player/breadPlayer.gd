@@ -160,6 +160,7 @@ func recoil(dir):
 		velocity.x -= 500
 	if dir == "down":
 		velocity.y = -550
+		dash_available = true
 	if dir == "up":
 		if velocity.y < 0:
 			velocity.y = 0

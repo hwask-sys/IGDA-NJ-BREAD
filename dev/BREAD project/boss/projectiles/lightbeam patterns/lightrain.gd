@@ -9,7 +9,10 @@ var beam_loops = 3
 
 var initial_position
 
+var angel
+
 func _enter_tree() -> void:
+	angel.phase_over.connect(kys)
 	var rect = bounds
 	
 	for j in beam_loops:
@@ -22,4 +25,7 @@ func _enter_tree() -> void:
 		await get_tree().create_timer(2.0).timeout
 	
 	await get_tree().create_timer(30.0).timeout
+	call_deferred("queue_free")
+
+func kys():
 	call_deferred("queue_free")
