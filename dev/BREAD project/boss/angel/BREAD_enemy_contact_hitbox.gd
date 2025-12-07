@@ -40,9 +40,9 @@ func _on_hitbox_entered(other: Area2D):
 ##I actually commented that all out bc im lazy
 
 func _on_hitbox_entered(other: Area2D):
-	print(other)
 	if other is SwordHitbox:
 		enemy_reference.damage(1)
+		other.get_parent().get_mana()
 		other.get_parent().knockback()
 
 

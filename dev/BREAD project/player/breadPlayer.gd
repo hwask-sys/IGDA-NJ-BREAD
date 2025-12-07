@@ -1,6 +1,13 @@
 extends PlayerSample
 class_name BREAD_player
 
+@export var mana = 0
+var max_mana = 8
+
+var healing_state = false
+
+signal hud_update
+
 var jump_cancel = false
 var dash_available = true
 #i would have used enums but idk if you guys know how to use them
@@ -18,6 +25,7 @@ var air_drag = true
 
 var actionable = true
 
+var doFlip = true
 
 func _physics_process(delta):
 	
@@ -31,10 +39,10 @@ func _physics_process(delta):
 	
 	
 	#i have to separate here for the dash state
-	if !dash_state and !stun:
+	if !dash_state and !stun and !healing_state:
 		super(delta)
 		
-		if Input.is_action_just_released("player_jump") and jump_cancel and !can_jump() and velocity.y < -20:
+		if Input.is_action_just_released("player_jump") and jump_cancel and !can_jump() and velocity.y < -20 and actionable:
 			velocity.y = -20
 			jump_cancel = false
 		
@@ -44,9 +52,14 @@ func _physics_process(delta):
 		if !dash_available and is_on_floor():
 			dash_available = true
 		
-		if Input.is_action_just_pressed("player_jump") and !is_on_floor() and !jump_cancel and dash_available:
+		if Input.is_action_just_pressed("player_jump") and !is_on_floor() and !jump_cancel and dash_available and actionable:
 			dash_available = false
 			airdash()
+		
+		if Input.is_action_just_pressed("player_input_3") and actionable and mana == max_mana:
+			pass
+			heal()
+		
 			
 	else:
 		dash_buffer -= delta
@@ -85,20 +98,26 @@ func airdash():
 	dash_state = true
 	actionable = false
 
+##similar healstate
+func heal():
+	mana = 0
+	hud_update.emit(current_health, mana)
+	healing_state = true
+	actionable = false
+	$"%Heal Timer".start()
+
 # modified for movement reasons
 func move_horizontal(input: float, delta: float) -> void:
 	if abs(input) < INPUT_THRESHOLD and abs(velocity.x) > 0:
-		print(1)
 		#velocity.x += -sign(velocity.x) * deceleration * delta
 		velocity.x = lerpf(velocity.x,0,deceleration/60 * delta)
 		if abs(velocity.x) < STOP_VELOCITY_THRSHOLD/10:
 			velocity.x = 0
 	elif abs(velocity.x) <= max_horizontal_speed:
 		velocity.x += input * acceleration * delta
-		print(2)
 	if abs(velocity.x) > max_horizontal_speed and air_drag:
-		print(3)
-		lerpf(velocity.x,max_horizontal_speed * sign(velocity.x) ,deceleration/60 * delta)
+		##issue here
+		velocity.x = lerpf(velocity.x,max_horizontal_speed * sign(velocity.x) ,deceleration/60 * delta)
 
 func get_source_damage():
 	return 0
@@ -114,6 +133,26 @@ func apply_gravity(delta: float) -> void:
 			if velocity.y > max_fall_speed:
 				velocity.y = max_fall_speed
 
+func fall_damage():
+	damage(1)
+	get_parent().blackscreen()
+	actionable = false
+
+func respawned():
+	actionable = true
+
+func update_animation() -> void:
+	if (!is_on_floor()):
+		anim_player.play("JUMP")
+	else:
+		if abs(velocity.x) < STOP_VELOCITY_THRSHOLD:
+			anim_player.play("IDLE")
+		else:
+			anim_player.play("WALK")
+			
+	if doFlip:
+		sprite.flip_h = true if sign(velocity.x) < 0 else (false if sign(velocity.x) > 0  else sprite.flip_h)
+
 func recoil(dir):
 	if dir == "left":
 		velocity.x += 500
@@ -126,3 +165,31 @@ func recoil(dir):
 			velocity.y = 0
 		else:
 			velocity.y += 200
+
+func get_mana():
+	if mana < max_mana:
+		mana += 1
+		hud_update.emit(current_health, mana)
+
+func damage(amount: float) -> void:
+	healing_state = false
+	sound_player.play_sound(hit_sound, global_position) # Assume when this is being called we are taking damage
+	current_health -= amount
+	current_health = clampf(current_health, 0, max_health)
+	check_death()
+	hud_update.emit(current_health, mana)
+	
+
+func _on_timer_started() -> void:
+	doFlip = false
+
+func _on_timer_timeout() -> void:
+	doFlip = true
+
+
+func _on_heal_timer_timeout() -> void:
+	if healing_state:
+		current_health += 3
+		healing_state = false
+		actionable = true
+		hud_update.emit(current_health, mana)

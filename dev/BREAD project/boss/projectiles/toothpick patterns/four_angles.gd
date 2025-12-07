@@ -1,0 +1,32 @@
+extends Node2D
+
+var the_blade = preload("res://dev/BREAD project/boss/projectiles/toothpick patterns/sword lunge.tscn")
+
+var tracked
+
+func _enter_tree() -> void:
+	var initial = (2 * PI / 8) 
+#	mult by * randi_range(0,7)
+	for k in range(3):
+		var chosen = []
+		
+		var j = 4
+		
+		while j > 0:
+			var temp = randi_range(0,7)
+			if temp not in chosen:
+				chosen.append(temp)
+				j -= 1
+		for i in chosen:
+			var attack = the_blade.instantiate()
+			attack.delay = .8
+			attack.tracked = tracked
+			attack.rotation = initial * i
+			add_child(attack)
+		await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(20).timeout
+	call_deferred("queue_free")
+
+func _process(_delta: float) -> void:
+	if tracked != null:
+		global_position  = tracked.position

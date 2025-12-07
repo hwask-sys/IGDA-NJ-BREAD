@@ -7,4 +7,6 @@
 script = ExtResource("1_46dq7")
 
 [node name="Lightbeam" parent="." instance=ExtResource("2_njmkg")]
+unique_name_in_owner = true
+active = 1.0
 rotation_from_horizontal = 3

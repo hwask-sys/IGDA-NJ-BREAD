@@ -8,3 +8,6 @@ func _ready() -> void:
 
 func knockback():
 	self.get_parent().get_parent().recoil(knockback_determiner)
+
+func get_mana():
+	self.get_parent().get_parent().get_mana()

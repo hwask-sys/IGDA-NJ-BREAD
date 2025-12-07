@@ -3,7 +3,7 @@ extends Projectile
 class_name Lightbeam
 
 @export var width = 100
-@export var active = 3
+@export var active = 1.0
 @export var rotation_from_horizontal = 0
 
 @onready var final_scale = width/100.0

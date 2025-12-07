@@ -7,7 +7,7 @@ signal stop_tracking
 var tracking_timer = 0
 
 func _enter_tree() -> void:
-	await get_tree().create_timer(1.6).timeout
+	await get_tree().create_timer(get_parent().delay).timeout
 	moving = true
 	parent_angle = get_parent().rotation
 	velocity = Vector2(400 * cos(parent_angle),400 * sin(parent_angle))

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmg3wainbdeji"]
+[gd_scene load_steps=12 format=3 uid="uid://dmg3wainbdeji"]
 
 [ext_resource type="Script" uid="uid://uxb8uxj83xng" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam.gd" id="1_sjvk3"]
 [ext_resource type="Texture2D" uid="uid://ke03xxrbvobb" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam.png" id="2_im2n3"]
+[ext_resource type="Script" uid="uid://djsuegaufsp47" path="res://dev/BREAD project/boss/projectiles/lightbeam/beamanim.gd" id="3_bkphl"]
 [ext_resource type="Script" uid="uid://v56hiwkum31e" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam_warning.gd" id="3_chlxr"]
 [ext_resource type="Texture2D" uid="uid://d4nqo1g4rsv7m" path="res://dev/BREAD project/boss/projectiles/lightbeam/lightbeam_warning.png" id="3_eeoqu"]
 
@@ -46,7 +47,6 @@ size = Vector2(977, 100)
 
 [node name="Lightbeam" type="CharacterBody2D"]
 script = ExtResource("1_sjvk3")
-active = 1
 clashes = false
 damage = 2.0
 
@@ -57,6 +57,7 @@ z_index = 2
 position = Vector2(500, 0)
 sprite_frames = SubResource("SpriteFrames_r8rci")
 autoplay = "default"
+script = ExtResource("3_bkphl")
 
 [node name="collision" type="Area2D" parent="beamanim"]
 unique_name_in_owner = true

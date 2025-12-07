@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://box0cnavbptwm"]
+[gd_scene load_steps=14 format=3 uid="uid://box0cnavbptwm"]
 
 [ext_resource type="Script" uid="uid://dey0junlb6lc1" path="res://dev/BREAD project/player/breadPlayer.gd" id="1_5i2ua"]
 [ext_resource type="Texture2D" uid="uid://ofoqedjacn88" path="res://DONOTEDITME/assets/sprites/player/jammy.png" id="2_68dig"]
+[ext_resource type="Script" uid="uid://cl32nppohqflb" path="res://dev/BREAD project/player/sprite_2d.gd" id="3_a3h4o"]
 [ext_resource type="PackedScene" uid="uid://desdea2rpmnwu" path="res://dev/BREAD project/player/player_hitbox_BREAD.tscn" id="3_qncrj"]
 [ext_resource type="Script" uid="uid://b1wij1fn2uice" path="res://dev/BREAD project/player/sword/knife_positions.gd" id="4_s0dwc"]
 [ext_resource type="Script" uid="uid://b664o6xi3tv1s" path="res://dev/BREAD project/player/attcking_timer.gd" id="9_e4p5l"]
@@ -106,6 +107,7 @@ z_index = 1
 texture = ExtResource("2_68dig")
 hframes = 4
 vframes = 3
+script = ExtResource("3_a3h4o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 editor_description = "This is the player's collision box. By default it is a rectangle."
@@ -128,10 +130,17 @@ libraries = {
 script = ExtResource("4_s0dwc")
 
 [node name="Timer" type="Timer" parent="knife_positions"]
-wait_time = 0.42
+wait_time = 0.28
 one_shot = true
 script = ExtResource("9_e4p5l")
 
+[node name="Heal Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
 [connection signal="attacked" from="knife_positions" to="knife_positions" method="_on_attacked"]
 [connection signal="attacked" from="knife_positions" to="knife_positions/Timer" method="_on_knife_positions_attacked"]
+[connection signal="started" from="knife_positions/Timer" to="." method="_on_timer_started"]
+[connection signal="timeout" from="knife_positions/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="knife_positions/Timer" to="knife_positions" method="_on_timer_timeout"]
+[connection signal="timeout" from="Heal Timer" to="." method="_on_heal_timer_timeout"]

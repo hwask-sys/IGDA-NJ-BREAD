@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drxgw0rdg0776"]
+
+[ext_resource type="Script" uid="uid://b7bqtf1i7c2i5" path="res://dev/BREAD project/boss/projectiles/toothpick patterns/four_angles.gd" id="1_l8vsb"]
+
+[node name="FourAngles" type="Node2D"]
+script = ExtResource("1_l8vsb")

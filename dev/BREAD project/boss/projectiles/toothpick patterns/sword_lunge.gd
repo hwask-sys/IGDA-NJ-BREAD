@@ -5,6 +5,8 @@ var tracking = true
 var tracked
 var locked_position = Vector2.ZERO
 
+var delay = 1.6
+
 func _enter_tree() -> void:
 	global_position  = tracked.position
 	visible = true
