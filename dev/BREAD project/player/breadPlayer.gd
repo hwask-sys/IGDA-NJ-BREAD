@@ -13,6 +13,9 @@ var igothit2 = preload("res://dev/BREAD project/sfx/death.ogg")
 
 var dashsound = preload("res://DONOTEDITME/assets/sounds/sfx/jump.ogg")
 
+var healsound = preload("res://dev/BREAD project/sfx/healsuccess.ogg")
+var healstartsound = preload("res://dev/BREAD project/sfx/healwindup.ogg")
+
 var jump_cancel = false
 var dash_available = true
 #i would have used enums but idk if you guys know how to use them
@@ -116,6 +119,7 @@ func heal():
 	mana = 0
 	hud_update.emit(current_health, mana)
 	healing_state = true
+	sound_player.play_sound_2d(healstartsound, global_position)
 	actionable = false
 	$"%Heal Timer".start()
 
@@ -210,6 +214,7 @@ func _on_heal_timer_done_healing() -> void:
 		current_health += 3
 		if current_health > 8:
 			current_health = 8
+		sound_player.play_sound_2d(healsound, global_position)
 		healing_state = false
 		actionable = true
 		hud_update.emit(current_health, mana)
