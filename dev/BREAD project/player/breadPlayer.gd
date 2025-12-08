@@ -63,7 +63,7 @@ func _physics_process(delta):
 			dash_available = false
 			airdash()
 		
-		if Input.is_action_just_pressed("player_input_3") and actionable and mana == max_mana:
+		if (Input.is_action_just_pressed("player_input_3") or Input.is_action_just_pressed("player_input_1"))and actionable and mana == max_mana:
 			pass
 			heal()
 		
@@ -208,6 +208,8 @@ func _on_heal_timer_done_healing() -> void:
 	if healing_state:
 		dash_available = true
 		current_health += 3
+		if current_health > 8:
+			current_health = 8
 		healing_state = false
 		actionable = true
 		hud_update.emit(current_health, mana)

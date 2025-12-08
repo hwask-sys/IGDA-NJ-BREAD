@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2dga4b2bgb8q"]
+
+[ext_resource type="Texture2D" uid="uid://fua4buxomx7f" path="res://dev/BREAD project/player/butter (unused)/fireball.png" id="1_xn2mg"]
+
+[node name="Butter" type="CharacterBody2D"]
+
+[node name="CharacterBody2D" type="Sprite2D" parent="."]
+position = Vector2(26, 0)
+texture = ExtResource("1_xn2mg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

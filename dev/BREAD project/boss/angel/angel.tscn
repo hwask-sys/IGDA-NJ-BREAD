@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1di7j7iosvjp"]
+[gd_scene load_steps=14 format=3 uid="uid://c1di7j7iosvjp"]
 
 [ext_resource type="Texture2D" uid="uid://dwfhqlcaxg2o4" path="res://dev/BREAD project/boss/angel/sprites/epic_angel_bread_thing_sprite_sheet.png" id="1_ag58y"]
 [ext_resource type="Script" uid="uid://c87kooi8bd2ab" path="res://dev/BREAD project/boss/angel/angel.gd" id="1_c1p4y"]
 [ext_resource type="Script" uid="uid://do0lhgavigehl" path="res://dev/BREAD project/boss/angel/BREAD_enemy_contact_hitbox.gd" id="2_632qx"]
+[ext_resource type="Script" uid="uid://3oimnswrpc5d" path="res://dev/BREAD project/boss/angel/animated_sprite_2d.gd" id="3_y0i71"]
+[ext_resource type="Script" uid="uid://cavpulv3v8o60" path="res://dev/BREAD project/boss/angel/flash_timer.gd" id="4_18c70"]
 [ext_resource type="Script" uid="uid://dgr80rwo63ufd" path="res://dev/BREAD project/boss/angel/movement_timer.gd" id="4_wwdvs"]
 [ext_resource type="Script" uid="uid://cets5p7p562lm" path="res://dev/BREAD project/boss/angel/attack_timer.gd" id="5_nx6tr"]
 
@@ -56,6 +58,12 @@ script = ExtResource("1_c1p4y")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gvjjc")
 autoplay = "default"
+script = ExtResource("3_y0i71")
+
+[node name="flashtimer" type="Timer" parent="AnimatedSprite2D"]
+wait_time = 0.15
+one_shot = true
+script = ExtResource("4_18c70")
 
 [node name="EnemyContactHitbox" type="Area2D" parent="."]
 editor_description = "This is one of two enemy hitboxes that the LegallyDistinctEnemyType has. This hitbox is specifically tailored to detect and handle player contact damage. Hence it is
@@ -86,6 +94,9 @@ script = ExtResource("5_nx6tr")
 [connection signal="phase_over" from="." to="." method="_on_phase_over"]
 [connection signal="phase_over" from="." to="Movement Timer" method="_on_angel_phase_over"]
 [connection signal="phase_over" from="." to="Attack Timer" method="_on_angel_phase_over"]
+[connection signal="timeout" from="AnimatedSprite2D/flashtimer" to="AnimatedSprite2D" method="_on_flashtimer_timeout"]
+[connection signal="hit" from="EnemyContactHitbox" to="AnimatedSprite2D" method="_on_enemy_contact_hitbox_hit"]
+[connection signal="hit" from="EnemyContactHitbox" to="AnimatedSprite2D/flashtimer" method="_on_enemy_contact_hitbox_hit"]
 [connection signal="timeout" from="Movement Timer" to="." method="_on_movement_timer_timeout"]
 [connection signal="timeout" from="Movement Timer" to="Movement Timer" method="_on_timeout"]
 [connection signal="timeout" from="Attack Timer" to="." method="_on_attack_timer_timeout"]

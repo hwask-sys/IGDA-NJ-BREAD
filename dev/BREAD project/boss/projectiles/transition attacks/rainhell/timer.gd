@@ -2,5 +2,5 @@ extends Timer
 
 
 func _on_timeout() -> void:
-	wait_time = .5
+	wait_time = 1
 	start()

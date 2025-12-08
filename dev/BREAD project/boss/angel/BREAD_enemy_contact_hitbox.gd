@@ -9,6 +9,8 @@ extends Area2D
 ## to call when a player/player hurtbox projectile enters this hitbox.
 class_name EnemyHitbox_BREAD
 
+signal hit
+
 var invul = false
 
 @onready var enemy_reference = $"../"
@@ -43,6 +45,7 @@ func _on_hitbox_entered(other: Area2D):
 
 func _on_hitbox_entered(other: Area2D):
 	if other is SwordHitbox and !invul:
+		hit.emit()
 		enemy_reference.damage(1)
 		other.get_parent().get_mana()
 		other.get_parent().knockback()

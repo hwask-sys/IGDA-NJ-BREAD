@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var health := 100
+@export var health := 60
 @onready var scene = get_parent()
 var player
 
@@ -16,6 +16,9 @@ var lightscream = preload("res://dev/BREAD project/sfx/lightscream.ogg")
 var phase = 1
 var invul = false
 signal phase_over
+
+var fadingawayforever = false
+var imseriousendit = false
 
 var rand_move_point = global_position
 var move_speed = 400
@@ -35,7 +38,7 @@ var lastLastAttack = 9
 
 var beamcount = 3
 
-## lowers to 6 eventually
+## lowers to 5 eventually
 var base_cooldown = 8
 
 func _ready() -> void:
@@ -50,32 +53,35 @@ func damage(hp):
 		sound_player.play_sound_2d(scratch, global_position)
 		health -= hp
 		if health <= 0:
+			if phase != 4:
+				fadeout = true
 			invul = true
-			health = 100
+			health = 60
 			sound_player.play_sound_2d(scream, global_position)
 			sound_player.play_sound_2d(lightscream, global_position)
 			phase_over.emit()
 			var temp = get_node("EnemyContactHitbox")
 			temp.monitorable = false
 			temp.monitoring = false
-			fadeout = true
+			
 			
 	
 
 func random_attack():
-	var temp = randi_range(0,3)
-	while temp == lastAttack and temp == lastLastAttack:
-		temp = randi_range(0,3)
-	lastLastAttack = lastAttack
-	lastAttack = temp
-	if temp == CIRCLE:
-		attack_circle()
-	elif temp == FOURSIDE:
-		fourside()
-	elif temp == LIGHTRAIN:
-		lightrain()
-	elif temp == LIGHTSPAM:
-		lightspam()
+	if !imseriousendit:
+		var temp = randi_range(0,3)
+		while temp == lastAttack and temp == lastLastAttack:
+			temp = randi_range(0,3)
+		lastLastAttack = lastAttack
+		lastAttack = temp
+		if temp == CIRCLE:
+			attack_circle()
+		elif temp == FOURSIDE:
+			fourside()
+		elif temp == LIGHTRAIN:
+			lightrain()
+		elif temp == LIGHTSPAM:
+			lightspam()
 
 func attack_circle():
 	var attack = attack_circle_pattern.instantiate()
@@ -129,6 +135,15 @@ func _physics_process(delta: float) -> void:
 		if ani.modulate.a >= 1:
 			ani.modulate.a = 1
 			fadein = false
+	elif fadingawayforever:
+		ani.modulate.a -= delta
+		if ani.modulate.a <= 0:
+			fadingawayforever = false
+			ani.modulate.a = 0
+			true_end()
+			imseriousendit = true
+	elif imseriousendit:
+		pass
 	else:
 		var direction = global_position.direction_to(rand_move_point)
 		if global_position.distance_to(rand_move_point) > 10:
@@ -179,6 +194,17 @@ func cooldownUpdate():
 		base_cooldown = 7
 	else:
 		base_cooldown = 4
+		health = 60
 
 func end():
+	imseriousendit = true
+	$"Movement Timer".stop()
+	$"Attack Timer".stop()
+	await get_tree().create_timer(5.0).timeout
+	fadingawayforever = true
+	
+
+func true_end():
+	sound_player.play_sound_2d(lightscream, global_position)
+	await get_tree().create_timer(5.0).timeout
 	level_loader.end_level()
