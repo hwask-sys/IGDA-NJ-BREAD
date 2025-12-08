@@ -6,6 +6,9 @@ var active = 1
 
 var width = 100
 
+func mute():
+	$Lightbeam.muted = true
+
 func _enter_tree() -> void:
 	$Lightbeam.width = width
 	$Lightbeam.active = active

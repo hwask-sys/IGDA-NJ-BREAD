@@ -22,7 +22,8 @@ func _process(delta: float) -> void:
 			scale.y = final_scale
 			warn_active = false
 			warn_fading = true
-			sound_player.play_sound_2d(lighting, global_position)
+			if get_parent().muted == false:
+				sound_player.play_sound_2d(lighting, global_position)
 			
 	if warn_fading:
 		if modulate.a > 0:

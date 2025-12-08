@@ -4,5 +4,5 @@ extends Node2D
 
 func summon_beam():
 	var instance = beam.instantiate()
-	instance.width = 80
+	instance.width = 67
 	add_child(instance)

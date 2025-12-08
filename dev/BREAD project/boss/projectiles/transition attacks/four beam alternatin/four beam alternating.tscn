@@ -13,6 +13,7 @@
 script = ExtResource("1_42dhi")
 
 [node name="Rotating Swords" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_g4umu")
 
 [node name="SwordToothpick" parent="Rotating Swords" instance=ExtResource("2_26ryh")]
@@ -57,6 +58,7 @@ position = Vector2(0, 67)
 muted = true
 
 [node name="Rotating Swords2" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_g4umu")
 
@@ -152,6 +154,8 @@ script = ExtResource("4_tblqn")
 
 [node name="sleeping eye" parent="buffer for later consistency" instance=ExtResource("7_npycg")]
 
+[connection signal="okok" from="Rotating Swords" to="Rotating Swords" method="_on_okok"]
+[connection signal="okok" from="Rotating Swords" to="Rotating Swords2" method="_on_rotating_swords_okok"]
 [connection signal="evens" from="Rotating Beams" to="Rotating Beams" method="_on_evens"]
 [connection signal="evens" from="Rotating Beams" to="Rotating Beams/evens" method="_on_rotating_beams_evens"]
 [connection signal="odds" from="Rotating Beams" to="Rotating Beams" method="_on_odds"]
