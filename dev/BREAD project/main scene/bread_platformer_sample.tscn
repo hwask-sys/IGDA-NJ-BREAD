@@ -271,7 +271,6 @@ unique_name_in_owner = true
 [node name="Angel" parent="." instance=ExtResource("8_5p58u")]
 z_index = -1
 position = Vector2(483, 427)
-health = 1
 
 [node name="Respawn" type="Marker2D" parent="."]
 position = Vector2(378, 605)
